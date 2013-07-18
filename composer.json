@@ -1,0 +1,18 @@
+{
+    "require": {
+        "j4mie/paris": "v1.3.0",
+        "j4mie/idiorm": "v1.3.0",
+        "twig/twig": "1.13.*@dev",
+        "swiftmailer/swiftmailer": "5.1.*@dev", 
+        "components/underscore": "1.4.4",
+        "components/modernizr": "2.6.2",
+        "components/jquery": "1.10.1",
+        "components/backbone": "1.0.0"
+    },
+    
+    "require-dev": {
+        "joseph-lenton/php-error": "dev-master",
+        "leafo/lessphp": "0.3.*@dev",
+        "davedevelopment/hamcrest-php": "dev-master"
+    }
+}
