@@ -1,0 +1,7 @@
+cache/*
+vendor/*
+components/*
+logs/*
+
+composer.lock
+
