@@ -1,7 +1,7 @@
 fixmyapp
 ========
 
-__WORK IN PROGRESS__
+__WORK IN PROGRESS__ At this time this application is mainly a test of the involved technologies...
 
 Web application to submit and vote for feature requests. 
 
@@ -12,7 +12,8 @@ Web application to submit and vote for feature requests.
 
 ## Install
 
-To install, run composer install from the fixmyapp folder.
+* To install, run composer install from the fixmyapp folder
+* Create the following folder : cache/templates and give php the right to write in it
 
 ## Proposition worflow
 

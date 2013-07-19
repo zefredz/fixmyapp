@@ -11,3 +11,12 @@ ORM::configure(array(
 ));
 
 ORM::configure('driver_options', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+
+// installer should create the following folders :
+//      cache, cache/templates, cache/languages, logs
+
+$loader = new Twig_Loader_Filesystem(__DIR__.'/templates');
+$twig = new Twig_Environment($loader, array(
+    'cache' => __DIR__.'/../cache/templates',
+    'debug' => true
+));
