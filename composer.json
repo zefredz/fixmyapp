@@ -6,7 +6,7 @@
         "j4mie/idiorm": "1.3.*",
         "twig/twig": "1.13.*@dev",
         "swiftmailer/swiftmailer": "5.1.*@dev", 
-        
+
         "components/underscore": "1.4.*",
         "components/modernizr": "2.6.*",
         "components/jquery": "1.10.*",
@@ -18,5 +18,9 @@
 
     "config": {
         "bin-dir": "bin/"
+    },
+
+    "autoload": {
+        "psr-0": {"FixMyApp\\": "src/FixMyApp/"}
     }
 }
