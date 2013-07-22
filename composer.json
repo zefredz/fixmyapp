@@ -21,6 +21,7 @@
     },
 
     "autoload": {
-        "psr-0": {"FixMyApp\\": "src/FixMyApp/"}
+        "psr-0": {"FixMyApp\\": "src/FixMyApp/"},
+        "psr-0": {"": "src/models"}
     }
 }
