@@ -9,11 +9,19 @@ Web application to submit and vote for feature requests.
 
 * PHP 5.3+, PDO and Mysql driver for PDO
 * [Composer](http://getcomposer.org)
+* MySQL 5+ (or MariaDB) with InnoDB support
 
 ## Install
 
-* To install, run composer install from the fixmyapp folder
+There is no install script yet...
+
+To install FixMyApp :
+
+* Run 'composer install' from the fixmyapp folder
 * Create the following folder : cache/templates and give php the right to write in it
+* Execute the install.sql script in your favorite mysql administration tool
+* Create a database user for the database and GRANT ALL PRIVILEGES on the fixmyapp tables
+* Edit the database configuration in app/config.json
 
 ## Proposition worflow
 

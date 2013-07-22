@@ -4,6 +4,8 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 $_CONFIG = $_GLOBALS['_CONFIG'] = json_decode(file_get_contents(__DIR__.'/config.json'));
 
+// init database
+
 ORM::configure(array(
     'connection_string' => $_CONFIG->database->connection_string,
     'username' => $_CONFIG->database->username,

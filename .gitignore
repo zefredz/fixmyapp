@@ -1,6 +1,7 @@
 ~*
 *.swp
 *.bak
+*.mwb.bak
 
 cache/*
 vendor/*
