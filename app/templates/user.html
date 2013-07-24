@@ -1,0 +1,14 @@
+{% extends "main.html" %}
+
+{% block body %}
+<!-- user template -->
+<h1>{{ sprintf(__("Hello %s %s"), user.firstname, user.lastname) }}</h1>
+<dl>
+    <dt>{{ __("First name") }}</dt>
+    <dd>{{ user.firstname }}</dd>
+    <dt>{{ __("Last name") }}</dt>
+    <dd>{{ user.lastname }}</dd>
+    <dt>{{ __("email") }}</dt>
+    <dd>{{ user.email }}</dd>
+</dl>
+{% endblock %}
