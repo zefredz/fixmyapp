@@ -23,7 +23,7 @@ ENGINE = InnoDB;
 CREATE  TABLE IF NOT EXISTS `fixmyapp`.`proposition` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `title` VARCHAR(255) NOT NULL ,
-  `body` TEXT NULL DEFAULT '' ,
+  `body` TEXT NULL ,
   `attachment` VARCHAR(45) NULL ,
   `score` VARCHAR(45) NULL ,
   `user_id` INT UNSIGNED NOT NULL ,
@@ -110,7 +110,7 @@ ENGINE = InnoDB;
 CREATE  TABLE IF NOT EXISTS `fixmyapp`.`proposition_history` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `title` VARCHAR(255) NOT NULL ,
-  `body` TEXT NULL DEFAULT '' ,
+  `body` TEXT NULL ,
   `attachment` VARCHAR(45) NULL ,
   `user_id` INT UNSIGNED NOT NULL ,
   `edit_date` DATETIME NOT NULL ,
