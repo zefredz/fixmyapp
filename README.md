@@ -15,6 +15,12 @@ Web application to submit and vote for feature requests.
 
 __There is no install script yet !__ Read app/setup/INSTALL.md for instructions.
 
+## Run the application
+
+You can easily run the application using the PHP built-in webserver by running the following command from the fixmyapp root folder :
+
+	php -S localhost:8000
+
 ## Proposition worflow
 
 1. Feature request/suggest submission and vote by the users
