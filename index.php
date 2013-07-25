@@ -11,6 +11,14 @@ require_once __DIR__ . '/app/init.php';
     $user->save();
 */
 
-$user = Model::factory('User')->find_one(1);
+$app = new Silex\Application();
 
-echo $twig->render( 'user.html',  array( 'title' => 'Greeting', 'user' => $user ) );
+$app->get( '/', function() use ($twig) {
+
+    $user = Model::factory('User')->find_one(1);
+
+    return $twig->render( 'user.html',  array( 'title' => 'Greeting', 'user' => $user ) );
+
+} );
+
+$app->run();

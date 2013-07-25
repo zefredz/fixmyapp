@@ -6,6 +6,7 @@
         "j4mie/idiorm": "1.3.*",
         "twig/twig": "1.13.*@dev",
         "swiftmailer/swiftmailer": "5.1.*@dev", 
+        "silex/silex": "1.*",
 
         "components/underscore": "1.4.*",
         "components/modernizr": "2.6.*",
