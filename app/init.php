@@ -46,3 +46,8 @@ $twig->addFunction($func_sprintf);
 // Initialize Silex application
 
 $app = new Silex\Application();
+
+if ( $_CONFIG->runtime->debug )
+{
+    $app['debug'] = true;
+}
