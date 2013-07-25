@@ -3,14 +3,14 @@
 {% block body %}
 
 <article>
-    {% set author = proposition.author() %}
+    {% set author = proposition.author().find_one() %}
     <hgroup>
         <h1>{{ proposition.title }}</h1>
         <p>{{ sprintf(__("Published by %s %s on %s"), author.firstname, autor.lastname, proposition.publication_date ) }}</p>
     </hgroup>
     <section class="propositionBody">{{ proposition.body }}</section>
     <section class="propositionComments">
-        {% for comment in proposition.comments() %}
+        {% for comment in proposition.comments().find_many() %}
             <article class="comment">
                 {% include "comment.html" %}
             </article>
