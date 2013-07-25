@@ -2,5 +2,5 @@
 
 function __($str)
 {
-    return $str;
+    return $GLOBALS['_LANG'][$str];
 }

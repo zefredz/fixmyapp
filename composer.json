@@ -13,7 +13,6 @@
         "components/jquery": "1.10.*",
         "components/backbone": "1.0.*",
 
-        "davedevelopment/phpmig": "*",
         "pimple/pimple": "1.*"
     },
 
@@ -22,7 +21,8 @@
     },
 
     "autoload": {
-        "psr-0": {"FixMyApp\\": "src/FixMyApp/"},
-        "psr-0": {"": "src/models"}
+        "psr-0": {
+            "": "src/models"
+        }        
     }
 }
