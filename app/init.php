@@ -4,6 +4,8 @@ require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../src/helpers.lib.php';
 require_once __DIR__ . '/../src/autoload.php';
 
+define ( 'BASE_URL', dirname($_SERVER['SCRIPT_NAME']) != '/' ? dirname($_SERVER['SCRIPT_NAME']) : '' );
+
 $GLOBALS['_CONFIG'] = json_decode(file_get_contents(__DIR__.'/config.json'));
 
 // init database

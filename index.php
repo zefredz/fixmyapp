@@ -17,11 +17,11 @@ $app->get( '/', function() use ($twig) {
 
     if( $user )
     {
-        return $twig->render( 'user.html',  array( 'title' => 'Greeting', 'user' => $user, 'baseurl' => dirname($_SERVER['SCRIPT_NAME']) ) );
+        return $twig->render( 'user.html',  array( 'title' => 'Greeting', 'user' => $user, 'baseurl' => BASE_URL ) );
     }
     else
     {
-        return $twig->render( 'error.html', array('title' => __('An error occured') , 'error_message' => __('User not found'), 'baseurl' => dirname($_SERVER['SCRIPT_NAME']) ) );
+        return $twig->render( 'error.html', array('title' => __('An error occured') , 'error_message' => __('User not found'), 'baseurl' => BASE_URL ) );
     }
 
 } );
@@ -32,11 +32,11 @@ $app->get( '/user/{id}', function( Silex\Application $app, $id ) use ($twig) {
 
     if( $user )
     {
-        return $twig->render( 'user.html',  array( 'title' => 'Greeting', 'user' => $user, 'baseurl' => dirname($_SERVER['SCRIPT_NAME']) ) );
+        return $twig->render( 'user.html',  array( 'title' => 'Greeting', 'user' => $user, 'baseurl' => BASE_URL ) );
     }
     else
     {
-        return $twig->render( 'error.html', array('title' => __('An error occured') , 'error_message' => sprintf(__('User not found %d'), $id ), 'baseurl' => dirname($_SERVER['SCRIPT_NAME']) ) );
+        return $twig->render( 'error.html', array('title' => __('An error occured') , 'error_message' => sprintf(__('User not found %d'), $id ), 'baseurl' => BASE_URL ) );
     }
 
 } );
