@@ -13,15 +13,7 @@ Web application to submit and vote for feature requests.
 
 ## Install
 
-There is no install script yet...
-
-To install FixMyApp :
-
-* Run 'composer install' from the fixmyapp folder
-* Create the following folder : cache/templates and give php the right to write in it
-* Execute the install.sql script in your favorite mysql administration tool
-* Create a database user for the database and GRANT ALL PRIVILEGES on the fixmyapp tables
-* Edit the database configuration in app/config.json
+__There is no install script yet !__ Read app/setup/INSTALL.md for instructions.
 
 ## Proposition worflow
 
