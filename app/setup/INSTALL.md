@@ -4,7 +4,7 @@ There is no automatic install yet.
 
 To install do the following :
 
-* Install composer (go to (getcomposer.org)[http://getcomposer.org] for more details)
+* Install composer (go to [getcomposer.org](http://getcomposer.org) for more details)
 * Run 'composer install' from the fixmyapp folder
 * Create the following folder : cache/templates and give php the right to write in it
 * Execute the install.sql script in your favorite mysql administration tool

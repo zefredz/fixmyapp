@@ -18,5 +18,5 @@
 
     git push
 
-source (https://gist.github.com/CristinaSolana/1885435)[https://gist.github.com/CristinaSolana/1885435]
+source [https://gist.github.com/CristinaSolana/1885435](https://gist.github.com/CristinaSolana/1885435)
 
