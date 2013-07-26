@@ -10,6 +10,7 @@ Web application to submit and vote for feature requests.
 * PHP 5.3+, PDO and Mysql driver for PDO
 * [Composer](http://getcomposer.org)
 * MySQL 5+ (or MariaDB) with InnoDB support
+* Developpers will also need node.js and the following npm modules : requirejs, less
 
 ## Install
 
@@ -33,3 +34,8 @@ You can easily run the application using the PHP built-in webserver by running t
 * Empower users by giving them the power to influence the developement and evolution of an application
 * Enhance transparency in the decision making about the evolution of an application
 
+## Command line tools : To do list
+
+* write install script
+* write update script
+* custom requirejs build.js
