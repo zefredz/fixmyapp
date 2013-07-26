@@ -8,6 +8,7 @@ vendor/*
 components/*
 logs/*
 bin/*
+tools/*
 
 composer.lock
 
