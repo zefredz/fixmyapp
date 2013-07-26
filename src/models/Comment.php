@@ -7,7 +7,7 @@ class Comment extends Model
 {
     /**
      * Helper to get the related proposition
-     * @retrun Proposition
+     * @retrun Proposition Paris Model
      */
     public function proposition()
     {
@@ -16,7 +16,7 @@ class Comment extends Model
 
     /**
      * Helper to get the related author
-     * @return User
+     * @return User Paris Model
      */
     public function author()
     {
