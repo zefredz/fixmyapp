@@ -12,7 +12,13 @@
     <section class="propositionComments">
         {% for comment in proposition.comments().find_many() %}
             <article class="comment">
-                {% include "comment.html" %}
+                <article class="comment">
+                    {% set c_author = proposition.author().find_one() %}
+                    <header class="commentHeader">
+                        {{ sprintf(__('published by %s %s on %s'), c_author.firstname, c_author.lastname, comment.date) }}
+                    </header>
+                    <section class="commentBody">{{ comment.body }}</section>
+                </article>
             </article>
         {% endfor %}
     </section>
