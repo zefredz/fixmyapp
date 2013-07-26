@@ -13,16 +13,7 @@ require_once __DIR__ . '/app/init.php';
 
 $app->get( '/', function() use ($twig) {
 
-    $user = Model::factory('User')->find_one(1);
-
-    if( $user )
-    {
-        return $twig->render( 'user.html',  array( 'title' => 'Greeting', 'user' => $user, 'baseurl' => BASE_URL ) );
-    }
-    else
-    {
-        return $twig->render( 'error.html', array('title' => __('An error occured') , 'error_message' => __('User not found'), 'baseurl' => BASE_URL ) );
-    }
+    return $twig->render( 'index.html', array('title' => __('FixMyApp') , 'baseurl' => BASE_URL ) );
 
 } );
 

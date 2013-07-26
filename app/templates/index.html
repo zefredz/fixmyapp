@@ -1,0 +1,33 @@
+{% extends "main.html" %}
+
+{% block body %}
+<hgroup id="siteHeader">
+    <h1>FixMyApp</h1>
+    <p>LOGO</p>
+</hgroup>
+<nav id="siteNavigation">
+    <ul id="siteMenuList">
+        <li>Propositions</li>
+        <li>Elected propositions</li>
+        <li>Roadmap</li>
+    </ul>
+</nav>
+<article id="mainContents">
+    <header id="mainContentsHeader">
+        <h1>Liste of propositions</h1>
+    </header>
+    <section class="proposition">
+        <header class="propositionHeader">Proposition title - published by ****** on *****</header>
+        <nav class="propositionNavigation">
+            <ul>
+                <li>#Votes</li>
+                <li>#Comments</li>
+                <li>#Views</li>
+            </ul>
+        </nav>
+        <div class="propositionContents">
+            Proposition contents
+        </div>
+    </section>
+</article>
+{% endblock %}
