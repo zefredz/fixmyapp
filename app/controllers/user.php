@@ -6,7 +6,7 @@ $userController->get( '/', function( Silex\Application $app ) use ($twig) {
 
     $users = Model::factory('User')->find_many();
 
-    return $twig->render( 'userlist.html',  array( 'title' => 'Greeting', 'users' => $users, 'baseurl' => BASE_URL ) );
+    return $twig->render( 'userlist.html',  array( 'title' => __('User list'), 'users' => $users, 'baseurl' => BASE_URL ) );
 
 } );
 
@@ -16,7 +16,7 @@ $userController->get( '/{id}', function( Silex\Application $app, $id ) use ($twi
 
     if( $user )
     {
-        return $twig->render( 'user.html',  array( 'title' => 'Greeting', 'user' => $user, 'baseurl' => BASE_URL ) );
+        return $twig->render( 'user.html',  array( 'title' => __('User profile'), 'user' => $user, 'baseurl' => BASE_URL ) );
     }
     else
     {
