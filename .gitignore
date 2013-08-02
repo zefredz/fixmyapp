@@ -2,6 +2,7 @@
 *.swp
 *.bak
 *.mwb.bak
+*.log
 
 cache/*
 vendor/*

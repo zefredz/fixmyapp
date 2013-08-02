@@ -54,22 +54,26 @@ if ( $_CONFIG->runtime->debug )
     $app['debug'] = true;
 }
 
+// Register Log service
+
+$app->register(new Silex\Provider\MonologServiceProvider(), array(
+    'monolog.logfile' => __DIR__.'/fixmyapp.log',
+    'monolog.level' => $_CONFIG->runtime->debug ? Monolog\Logger::DEBUG : Monolog\Logger::ERROR,
+    'monolog.name' => 'fixmyapp'
+));
+
 // Register authentication controller
 
 $app->register( new Silex\Provider\SessionServiceProvider() );
 
 $app->get('/login', function() use ($app) {
     $username = $app['request']->server->get('PHP_AUTH_USER', false);
-    $password = $app['request']->server->get('PHP__AUTH_PW');
-
-    if ( $username )
-    {
-        die("{$username}:{$password}");
-    }
+    $password = $app['request']->server->get('PHP_AUTH_PW');
 
     if ( 'igor' === $username && 'password' === $password )
     {
         $app['session']->set( 'user', array( 'username' => $username ) );
+        $app['monolog']->addInfo(sprintf("User '%s' signed in.", $username));
         return $app->redirect('/');
     }
 

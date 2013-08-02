@@ -7,6 +7,8 @@
         "twig/twig": "1.13.*@dev",
         "swiftmailer/swiftmailer": "5.1.*@dev", 
         "silex/silex": "1.*",
+        "symfony/monolog-bridge": "2.4.*@dev",
+        "monolog/monolog": ">=1.0.0",
 
         "components/underscore": "1.4.*",
         "components/modernizr": "2.6.*",
