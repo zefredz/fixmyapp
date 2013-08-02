@@ -23,6 +23,6 @@ $userController->get( '/{id}', function( Silex\Application $app, $id ) use ($twi
         return $twig->render( 'error.html', array('title' => __('An error occured') , 'error_message' => sprintf(__('User not found %d'), $id ), 'baseurl' => BASE_URL ) );
     }
 
-} );
+} )->before( $checkLogin );
 
 return $userController;

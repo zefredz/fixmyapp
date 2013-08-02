@@ -53,3 +53,35 @@ if ( $_CONFIG->runtime->debug )
 {
     $app['debug'] = true;
 }
+
+// Register authentication controller
+
+$app->register( new Silex\Provider\SessionServiceProvider() );
+
+$app->get('/login', function() use ($app) {
+    $username = $app['request']->server->get('PHP_AUTH_USER', false);
+    $password = $app['request']->server->get('PHP__AUTH_PW');
+
+    if ( $username )
+    {
+        die("{$username}:{$password}");
+    }
+
+    if ( 'igor' === $username && 'password' === $password )
+    {
+        $app['session']->set( 'user', array( 'username' => $username ) );
+        return $app->redirect('/');
+    }
+
+    $response = new Symfony\Component\HttpFoundation\Response();
+    $response->headers->set( "WWW-Authenticate", sprintf('Basic realm="%s"', 'site_login') );
+    $response->setStatusCode(401, 'Please sign in');
+    return $response;
+});
+
+$checkLogin = $GLOBALS['checkLogin'] = function() use ($app) {
+    if ( null === $user = $app['session']->get('user') )
+    {
+        return $app->redirect('/login');
+    }
+};
