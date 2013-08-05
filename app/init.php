@@ -2,7 +2,6 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../src/helpers.lib.php';
-require_once __DIR__ . '/../src/autoload.php';
 
 define ( 'BASE_URL', dirname($_SERVER['SCRIPT_NAME']) != '/' ? dirname($_SERVER['SCRIPT_NAME']) : '' );
 
@@ -18,7 +17,6 @@ ORM::configure(array(
 
 ORM::configure('driver_options', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
 
-$GLOBALS['_LANG'] = new FixMyApp\L10n(__DIR__.'/lang');
 
 // installer should create the following folders :
 //      cache, cache/templates, cache/languages, logs
