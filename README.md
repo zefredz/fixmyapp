@@ -43,8 +43,8 @@ You can easily run the application using the PHP built-in webserver by running t
 ## Application file structure
 
 * app/ : contains application specific files
-    * controllers/ : Silex controllers
     * models/ :  Paris models
+    * routes/ : Silex routes definition
     * setup/ : setup files
     * templates/ : Twig templates
     * config.json : application configuration

@@ -17,6 +17,6 @@ $app->get( '/', function() use ($twig) {
 
 } );
 
-$app->mount( '/user', include __DIR__ . '/app/controllers/user.php' );
+$app->mount( '/user', include __DIR__ . '/app/routes/user.php' );
 
 $app->run();

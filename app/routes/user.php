@@ -4,7 +4,7 @@ $userController = $app['controllers_factory'];
 
 $userController->get( '/', function( Silex\Application $app ) use ($twig) {
 
-    $users = Model::factory('User')->find_many();
+    $users = $app['users.repository']->find_many();
 
     return $twig->render( 'userlist.html',  array( 'title' => __('User list'), 'users' => $users, 'baseurl' => BASE_URL ) );
 
@@ -12,7 +12,7 @@ $userController->get( '/', function( Silex\Application $app ) use ($twig) {
 
 $userController->get( '/{id}', function( Silex\Application $app, $id ) use ($twig) {
 
-    $user = Model::factory('User')->find_one($id);
+    $user = $app['users.repository']->find_one($id);
 
     if( $user )
     {
