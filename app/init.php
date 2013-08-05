@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../src/helpers.lib.php';
+require_once __DIR__ . '/controllers/autoload.php';
 
 define ( 'BASE_URL', dirname($_SERVER['SCRIPT_NAME']) != '/' ? dirname($_SERVER['SCRIPT_NAME']) : '' );
 
@@ -17,11 +17,7 @@ ORM::configure(array(
 
 ORM::configure('driver_options', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
 
-
-// installer should create the following folders :
-//      cache, cache/templates, cache/languages, logs
-
-// Initialize Silex application
+// Initialize Silex
 
 $app = new Silex\Application();
 
@@ -30,7 +26,7 @@ if ( $_CONFIG->runtime->debug )
     $app['debug'] = true;
 }
 
-// Register service providers
+// Register Silex service providers
 
 $app->register(new Silex\Provider\MonologServiceProvider(), array(
     'monolog.logfile' => __DIR__.'/fixmyapp.log',
@@ -49,20 +45,6 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
         'cache' => __DIR__.'/../cache/templates',
         'debug' => true ),
 ));
-
-/*$func_l10n = new Twig_SimpleFunction('__', function ($str) {
-    return __($str);
-});
-
-$app['twig']->addFunction($func_l10n);
-
-
-$func_sprintf = new Twig_SimpleFunction('sprintf', function () {
-    return call_user_func_array( 'sprintf', func_get_args() );
-});
-
-$app['twig']->addFunction($func_sprintf);*/
-
 
 $app->register( new Silex\Provider\FormServiceProvider() );
 $app->register( new Silex\Provider\ValidatorServiceProvider() );

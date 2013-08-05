@@ -6,7 +6,7 @@
     {% set author = proposition.author().find_one() %}
     <hgroup>
         <h1>{{ proposition.title }}</h1>
-        <p>{{ sprintf(__("Published by %s %s on %s"), author.firstname, autor.lastname, proposition.publication_date ) }}</p>
+        <p>{{ app.translator.trans("Published by %firstname% %lastname% on %date%", { '%firstname%': author.firstname, '%lastname%': autor.lastname, '%date%': proposition.publication_date ) }}</p>
     </hgroup>
     <section class="propositionBody">{{ proposition.body }}</section>
     <section class="propositionComments">
@@ -15,7 +15,7 @@
                 <article class="comment">
                     {% set c_author = proposition.author().find_one() %}
                     <header class="commentHeader">
-                        {{ sprintf(__('published by %s %s on %s'), c_author.firstname, c_author.lastname, comment.date) }}
+                        {{ app.translator.trans("Published by %firstname% %lastname% on %date%", { '%firstname%': c_author.firstname, '%lastname%': c_author.lastname, '%date%': comment.date }) }}
                     </header>
                     <section class="commentBody">{{ comment.body }}</section>
                 </article>
