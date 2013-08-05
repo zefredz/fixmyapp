@@ -89,3 +89,9 @@ $checkLogin = $GLOBALS['checkLogin'] = function() use ($app) {
         return $app->redirect('/login');
     }
 };
+
+// define application repositories
+
+$app['users.repository'] = Model::factory('User');
+$app['propositions.repository'] = Model::factory('Proposition');
+$app['comment.repository'] = Model::factory('Comment');
