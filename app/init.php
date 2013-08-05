@@ -67,7 +67,8 @@ $app['twig']->addFunction($func_sprintf);*/
 
 
 $app->register( new Silex\Provider\FormServiceProvider() );
-$app->register(new Silex\Provider\ValidatorServiceProvider());
+$app->register( new Silex\Provider\ValidatorServiceProvider() );
+$app->register( new Silex\Provider\SwiftmailerServiceProvider() );
 
 // Register authentication controller
 
