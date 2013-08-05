@@ -38,6 +38,16 @@ $app->register(new Silex\Provider\TranslationServiceProvider(), array(
     'locale_fallback' => 'en'
 ));
 
+$app['translator'] = $app->share($app->extend('translator', function($translator, $app) {
+    $translator->addLoader('yaml', new Symfony\Component\Translation\Loader\YamlFileLoader());
+
+    $translator->addResource('yaml', __DIR__.'/locales/en.messages.yml', 'en');
+    $translator->addResource('yaml', __DIR__.'/locales/en.errors.yml', 'en');
+    $translator->addResource('yaml', __DIR__.'/locales/en.validators.yml', 'en');
+
+    return $translator;
+}));
+
 
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/templates',
