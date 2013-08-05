@@ -10,6 +10,7 @@
         "silex/silex": "1.*",
         "symfony/monolog-bridge": "2.4.*@dev",
         "monolog/monolog": ">=1.0.0",
+        "symfony/form": "~2.3",
 
         "components/underscore": "1.4.*",
         "components/modernizr": "2.6.*",

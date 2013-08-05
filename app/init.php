@@ -62,6 +62,10 @@ $func_sprintf = new Twig_SimpleFunction('sprintf', function () {
 
 $app['twig']->addFunction($func_sprintf);
 
+// register form service provider
+
+$app->register(new Silex\Provider\FormServiceProvider());
+
 
 // Register authentication controller
 
