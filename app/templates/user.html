@@ -2,13 +2,13 @@
 
 {% block body %}
 <!-- user template -->
-<h1>{{ sprintf(__("Hello %s %s"), user.firstname, user.lastname) }}</h1>
+<h1>{{ app.translator.trans("Hello %firstname% %lastname%", { '%firstname%': user.firstname, '%lastname%': user.lastname}) }}</h1>
 <dl>
-    <dt>{{ __("First name") }}</dt>
+    <dt>{{ 'First name'|trans }}</dt>
     <dd>{{ user.firstname }}</dd>
-    <dt>{{ __("Last name") }}</dt>
+    <dt>{{ 'Last name'|trans }}</dt>
     <dd>{{ user.lastname }}</dd>
-    <dt>{{ __("email") }}</dt>
+    <dt>{{ 'email'|trans }}</dt>
     <dd>{{ user.email }}</dd>
 </dl>
 {% endblock %}

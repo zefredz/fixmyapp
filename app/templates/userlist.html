@@ -2,15 +2,15 @@
 
 {% block body %}
 <!-- user template -->
-<h1>{{ __('Users') }}</h1>
+<h1>{{ 'Users'|trans }}</h1>
 
 <table>
 	<thead>
 		<tr>
-			<th>{{ __('First name') }}</th>
-			<th>{{ __('Last name') }}</th>
-			<th>{{ __('email') }}</th>
-			<th>{{ __('Profile') }}</th>
+			<th>{{ 'First name'|trans }}</th>
+			<th>{{ 'Last name'|trans }}</th>
+			<th>{{ 'email'|trans }}</th>
+			<th>{{ 'Profile'|trans }}</th>
 			<th></th>
 		</tr>
 	</thead>
@@ -20,7 +20,7 @@
 			<td>{{ user.firstname }}</td>
 			<td>{{ user.lastname }}</td>
 			<td>{{ user.email }}</td>
-			<td><a href="{{ baseurl }}/user/{{ user.id }}">{{ __('show') }}</a></td>
+			<td><a href="{{ baseurl }}/user/{{ user.id }}">{{ 'show'|trans }}</a></td>
 		</tr>
 		{% endfor %}
 	</tbody>

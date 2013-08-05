@@ -32,7 +32,7 @@ if ( $_CONFIG->runtime->debug )
     $app['debug'] = true;
 }
 
-// Register Log service
+// Register service providers
 
 $app->register(new Silex\Provider\MonologServiceProvider(), array(
     'monolog.logfile' => __DIR__.'/fixmyapp.log',
@@ -40,7 +40,10 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
     'monolog.name' => 'fixmyapp'
 ));
 
-// register twig service provider
+$app->register(new Silex\Provider\TranslationServiceProvider(), array(
+    'locale_fallback' => 'en'
+));
+
 
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/templates',
@@ -49,7 +52,7 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
         'debug' => true ),
 ));
 
-$func_l10n = new Twig_SimpleFunction('__', function ($str) {
+/*$func_l10n = new Twig_SimpleFunction('__', function ($str) {
     return __($str);
 });
 
@@ -60,11 +63,11 @@ $func_sprintf = new Twig_SimpleFunction('sprintf', function () {
     return call_user_func_array( 'sprintf', func_get_args() );
 });
 
-$app['twig']->addFunction($func_sprintf);
+$app['twig']->addFunction($func_sprintf);*/
 
-// register form service provider
 
 $app->register( new Silex\Provider\FormServiceProvider() );
+$app->register(new Silex\Provider\ValidatorServiceProvider());
 
 // Register authentication controller
 
