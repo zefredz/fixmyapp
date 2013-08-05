@@ -11,9 +11,9 @@ require_once __DIR__ . '/app/init.php';
     $user->save();
 */
     
-$app->get( '/', function() use ($twig) {
+$app->get( '/', function( Silex\Application $app ) {
 
-    return $twig->render( 'index.html', array('title' => __('FixMyApp') , 'baseurl' => BASE_URL ) );
+    return $app['twig']->render( 'index.html', array('title' => __('FixMyApp') , 'baseurl' => BASE_URL ) );
 
 } );
 
