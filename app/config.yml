@@ -1,0 +1,6 @@
+database:
+  connection_string: mysql:host=localhost;dbname=fixmyapp
+  username: fixmyapp
+  password: fixmyapp
+runtime:
+  debug: true

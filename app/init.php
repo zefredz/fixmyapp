@@ -5,14 +5,15 @@ require_once __DIR__ . '/controllers/autoload.php';
 
 define ( 'BASE_URL', dirname($_SERVER['SCRIPT_NAME']) != '/' ? dirname($_SERVER['SCRIPT_NAME']) : '' );
 
-$GLOBALS['_CONFIG'] = json_decode(file_get_contents(__DIR__.'/config.json'));
+$yamlParser = new Symfony\Component\Yaml\Parser();
+$GLOBALS['_CONFIG'] = $yamlParser->parse(file_get_contents(__DIR__.'/config.yml'));
 
 // init database
 
 ORM::configure(array(
-    'connection_string' => $_CONFIG->database->connection_string,
-    'username' => $_CONFIG->database->username,
-    'password' => $_CONFIG->database->password
+    'connection_string' => $_CONFIG['database']['connection_string'],
+    'username' => $_CONFIG['database']['username'],
+    'password' => $_CONFIG['database']['password']
 ));
 
 ORM::configure('driver_options', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
@@ -21,7 +22,7 @@ ORM::configure('driver_options', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAME
 
 $app = new Silex\Application();
 
-if ( $_CONFIG->runtime->debug )
+if ( $_CONFIG['runtime']['debug'] === true )
 {
     $app['debug'] = true;
 }
@@ -30,7 +31,7 @@ if ( $_CONFIG->runtime->debug )
 
 $app->register(new Silex\Provider\MonologServiceProvider(), array(
     'monolog.logfile' => __DIR__.'/fixmyapp.log',
-    'monolog.level' => $_CONFIG->runtime->debug ? Monolog\Logger::DEBUG : Monolog\Logger::ERROR,
+    'monolog.level' => $_CONFIG['runtime']['debug'] === true ? Monolog\Logger::DEBUG : Monolog\Logger::ERROR,
     'monolog.name' => 'fixmyapp'
 ));
 
