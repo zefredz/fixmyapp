@@ -23,28 +23,6 @@ $GLOBALS['_LANG'] = new FixMyApp\L10n(__DIR__.'/lang');
 // installer should create the following folders :
 //      cache, cache/templates, cache/languages, logs
 
-// Initialize Twig templates and register custom functions
-
-$loader = new Twig_Loader_Filesystem(__DIR__.'/templates');
-
-$twig = new Twig_Environment($loader, array(
-    'cache' => __DIR__.'/../cache/templates',
-    'debug' => true
-));
-
-$func_l10n = new Twig_SimpleFunction('__', function ($str) {
-    return __($str);
-});
-
-$twig->addFunction($func_l10n);
-
-
-$func_sprintf = new Twig_SimpleFunction('sprintf', function () {
-    return call_user_func_array( 'sprintf', func_get_args() );
-});
-
-$twig->addFunction($func_sprintf);
-
 // Initialize Silex application
 
 $app = new Silex\Application();
@@ -61,6 +39,29 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
     'monolog.level' => $_CONFIG->runtime->debug ? Monolog\Logger::DEBUG : Monolog\Logger::ERROR,
     'monolog.name' => 'fixmyapp'
 ));
+
+// register twig service provider
+
+$app->register(new Silex\Provider\TwigServiceProvider(), array(
+    'twig.path' => __DIR__.'/templates',
+    'twig.options' => array(
+        'cache' => __DIR__.'/../cache/templates',
+        'debug' => true ),
+));
+
+$func_l10n = new Twig_SimpleFunction('__', function ($str) {
+    return __($str);
+});
+
+$app['twig']->addFunction($func_l10n);
+
+
+$func_sprintf = new Twig_SimpleFunction('sprintf', function () {
+    return call_user_func_array( 'sprintf', func_get_args() );
+});
+
+$app['twig']->addFunction($func_sprintf);
+
 
 // Register authentication controller
 

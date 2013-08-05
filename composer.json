@@ -5,6 +5,7 @@
         "j4mie/paris": "1.3.*",
         "j4mie/idiorm": "1.3.*",
         "twig/twig": "1.13.*@dev",
+        "symfony/twig-bridge": "~2.3",
         "swiftmailer/swiftmailer": "5.1.*@dev", 
         "silex/silex": "1.*",
         "symfony/monolog-bridge": "2.4.*@dev",
