@@ -34,12 +34,6 @@ You can easily run the application using the PHP built-in webserver by running t
 * Empower users by giving them the power to influence the developement and evolution of an application
 * Enhance transparency in the decision making about the evolution of an application
 
-## Command line tools : To do list
-
-* write install script
-* write update script
-* custom requirejs build.js
-
 ## Application file structure
 
 * app/ : contains application specific files
