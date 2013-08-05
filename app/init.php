@@ -64,14 +64,13 @@ $app['twig']->addFunction($func_sprintf);
 
 // register form service provider
 
-$app->register(new Silex\Provider\FormServiceProvider());
-
+$app->register( new Silex\Provider\FormServiceProvider() );
 
 // Register authentication controller
 
 $app->register( new Silex\Provider\SessionServiceProvider() );
 
-$app->get('/login', function() use ($app) {
+$app->get( '/login', function( Silex\Application $app ) {
     $username = $app['request']->server->get('PHP_AUTH_USER', false);
     $password = $app['request']->server->get('PHP_AUTH_PW');
 
