@@ -82,7 +82,9 @@ $app->get( '/login', function( Silex\Application $app ) {
     return $response;
 });
 
-/*$app->get( '/logout', function( Silex\Application $app ) {
+// This is useless in HTTP auth since the browser resend automatically the login/password...
+
+$app->get( '/logout', function( Silex\Application $app ) {
 
     if ( $user = $app['session']->get('user') )
     {
@@ -90,7 +92,7 @@ $app->get( '/login', function( Silex\Application $app ) {
     }
 
     return $app->redirect('/');
-});*/
+});
 
 $checkLogin = $GLOBALS['checkLogin'] = function() use ($app) {
     if ( null === $user = $app['session']->get('user') )
