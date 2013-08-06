@@ -82,6 +82,16 @@ $app->get( '/login', function( Silex\Application $app ) {
     return $response;
 });
 
+/*$app->get( '/logout', function( Silex\Application $app ) {
+
+    if ( $user = $app['session']->get('user') )
+    {
+        $app['session']->clear();
+    }
+
+    return $app->redirect('/');
+});*/
+
 $checkLogin = $GLOBALS['checkLogin'] = function() use ($app) {
     if ( null === $user = $app['session']->get('user') )
     {
