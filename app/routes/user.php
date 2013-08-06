@@ -6,9 +6,42 @@ $userController->get( '/', function( Silex\Application $app ) {
 
     $users = $app['users.repository']->find_many();
 
-    return $app['twig']->render( 'userlist.html',  array( 'title' => $app['translator']->trans('User list'), 'users' => $users, 'baseurl' => BASE_URL ) );
+    return $app['twig']->render( 'user.list.html',  array( 'title' => $app['translator']->trans('User list'), 'users' => $users, 'baseurl' => BASE_URL ) );
 
 } );
+
+$userController->match( '/new', function( Silex\Application $app ) {
+
+    $data = array(
+        'firstname' => 'Your first name',
+        'lastname' => 'Your last name',
+        'email' => 'Your email',
+    );
+
+    $form = $app['form.factory']->createBuilder('form', $data)
+        ->add('firstname')
+        ->add('lastname')
+        ->add('email')
+        ->getForm();
+
+    if ( 'POST' === $app['request']->getMethod() )
+    {
+        $form->bind($app['request']);
+
+        if ($form->isValid()) 
+        {
+            $data = $form->getData();
+            var_dump($data);
+        }
+        else
+        {
+            throw new Exception('Invalid data supplied to form');
+        }
+    }
+
+    return $app['twig']->render('user.new.html', array('form' => $form->createView(), 'baseurl' => BASE_URL ) );
+
+} )->before( $checkLogin ); // adding users requires login
 
 $userController->get( '/{id}', function( Silex\Application $app, $id ) {
 
@@ -23,6 +56,6 @@ $userController->get( '/{id}', function( Silex\Application $app, $id ) {
         return $app['twig']->render( 'error.html', array('title' => $app['translator']->trans('An error occured') , 'error_message' => $app['translator']->trans('User not found %user_id%', array( '%user_id%' => $id ) ), 'baseurl' => BASE_URL ) );
     }
 
-} ); // ->before( $checkLogin );
+} );
 
 return $userController;

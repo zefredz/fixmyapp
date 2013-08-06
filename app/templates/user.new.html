@@ -1,0 +1,9 @@
+{% extends "main.html" %}
+
+{% block body %}
+<form action="{{ baseurl }}/user/new" method="post">
+    {{ form_widget(form) }}
+
+    <input type="submit" name="submit" />
+</form>
+{% endblock %}
