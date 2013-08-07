@@ -19,9 +19,10 @@ $userController->match( '/new', function( Silex\Application $app ) {
     );
 
     $form = $app['form.factory']->createBuilder('form', $data)
+        ->setAction(BASE_URL.'/user/new')
         ->add('firstname')
         ->add('lastname')
-        ->add('email')
+        ->add('email', 'email' )
         ->getForm();
 
     if ( 'POST' === $app['request']->getMethod() )

@@ -1,9 +1,19 @@
 {% extends "main.html" %}
 
 {% block body %}
-<form action="{{ baseurl }}/user/new" method="post">
-    {{ form_widget(form) }}
+{{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    <dl>
+        <dt>{{ form_label(form.firstname, 'First name'|trans ) }}{{ form_errors(form.firstname) }}</dt>
+        <dd>{{ form_widget(form.firstname) }}</dd>
+        <dt>{{ form_label(form.lastname, 'Last name'|trans ) }}{{ form_errors(form.lastname) }}</dt>
+        <dd>{{ form_widget(form.lastname) }}</dd>
+        <dt>{{ form_label(form.email, 'email'|trans ) }}{{ form_errors(form.email) }}</dt>
+        <dd>{{ form_widget(form.email) }}</dd>
+    </dl>
 
     <input type="submit" name="submit" />
-</form>
+
+{{ form_end(form) }}
 {% endblock %}
