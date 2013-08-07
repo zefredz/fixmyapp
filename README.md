@@ -37,7 +37,7 @@ You can easily run the application using the PHP built-in webserver by running t
 ## Application file structure
 
 * app/ : contains application specific files
-    * controllers/ : application controller classes
+    * classes/ : application specific classes
     * models/ :  Paris models
     * routes/ : Silex routes definition
     * setup/ : setup files
