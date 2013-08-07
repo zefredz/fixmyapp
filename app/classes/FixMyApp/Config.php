@@ -26,7 +26,12 @@ class Config
         }
         else
         {
-            throw new Exception("Property {$name} does not exists");
+            throw new \Exception("Property {$name} does not exists");
         }
+    }
+
+    public function __set( $name, $value )
+    {
+        throw new \Exception("The configuration is read-only");
     }
 }
