@@ -1,9 +1,0 @@
-{% macro input(label, name, value, type, size) %}
-    <label for="id_{{ name }}">{{ label }}</label>
-    <input type="{{ type|default('text') }}" name="{{ name }}" id="id_input_{{ name }}" value="{{ value|e }}" size="{{ size|default(20) }}" />
-{% endmacro %}
-
-{% macro textarea(label, name, value, rows, cols, label) %}
-    <label for="id_{{ name }}">{{ label }}</label>
-    <textarea name="{{ name }}" id="id_{{ name }}" rows="{{ rows|default(20) }}" cols="{{ cols|default(80) }}">{{ value|e }}</textarea>
-{% endmacro %}
