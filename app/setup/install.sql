@@ -50,7 +50,7 @@ CREATE  TABLE IF NOT EXISTS `fixmyapp`.`userdata` (
   `first_connection` DATETIME NULL ,
   `last_submission` DATETIME NULL ,
   `last_comment` VARCHAR(45) NULL ,
-  `users_id` INT UNSIGNED NOT NULL ,
+  `user_id` INT UNSIGNED NOT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `fk_userdata_users` (`users_id` ASC) ,
   CONSTRAINT `fk_userdata_users`
