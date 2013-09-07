@@ -3,6 +3,18 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/classes/autoload.php';
 
+// temporary code will be moved to installer
+
+if ( ! file_exists(__DIR__.'/../cache/templates') )
+{
+    mkdir(__DIR__.'/../cache/templates', 0777, true );
+}
+
+if ( ! file_exists(__DIR__.'/../cache/http') )
+{
+    mkdir(__DIR__.'/../cache/http', 0777, true );
+}
+
 define ( 'BASE_URL', dirname($_SERVER['SCRIPT_NAME']) != '/' ? dirname($_SERVER['SCRIPT_NAME']) : '' );
 
 $yamlParser = new Symfony\Component\Yaml\Parser();
@@ -48,6 +60,10 @@ $app['translator'] = $app->share($app->extend('translator', function($translator
 
     return $translator;
 }));
+
+$app->register(new Silex\Provider\HttpCacheServiceProvider(), array(
+    'http_cache.cache_dir' => __DIR__.'/../cache/http',
+));
 
 
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
