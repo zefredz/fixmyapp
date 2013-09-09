@@ -46,7 +46,7 @@ $userController->match( '/new', function( Silex\Application $app ) {
 
     return $app['twig']->render('user.new.html', array( 'title' => $app['translator']->trans('New user'), 'form' => $form->createView(), 'baseurl' => BASE_URL ) );
 
-} )->before( $checkLogin ); // adding users requires login
+} ); //->before( $checkLogin ); // adding users requires login
 
 $userController->get( '/{id}', function( Silex\Application $app, $id ) {
 
