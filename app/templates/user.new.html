@@ -1,5 +1,11 @@
 {% extends "main.html" %}
 
+{% block nav %}
+        <li>
+            <a href="{{ baseurl }}/user">{{ 'User list'|trans }}</a></td>
+        </li>
+{% endblock %}
+
 {% block body %}
 {{ form_start(form) }}
     {{ form_errors(form) }}

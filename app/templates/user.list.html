@@ -1,5 +1,11 @@
 {% extends "main.html" %}
 
+{% block nav %}
+		<li>
+			<a href="{{ baseurl }}/user/new">{{ 'Add user'|trans }}</a></td>
+		</li>
+{% endblock %}
+
 {% block body %}
 <!-- user template -->
 <h1>{{ 'User list'|trans }}</h1>

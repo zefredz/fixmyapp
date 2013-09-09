@@ -1,5 +1,14 @@
 {% extends "main.html" %}
 
+{% block nav %}
+        <li>
+            <a href="{{ baseurl }}/user">{{ 'User list'|trans }}</a></td>
+        </li>
+        <li>
+            <a href="{{ baseurl }}/user/new">{{ 'Add user'|trans }}</a></td>
+        </li>
+{% endblock %}
+
 {% block body %}
 <!-- user template -->
 <h1>{{ app.translator.trans("Hello %firstname% %lastname%", { '%firstname%': user.firstname, '%lastname%': user.lastname}) }}</h1>
