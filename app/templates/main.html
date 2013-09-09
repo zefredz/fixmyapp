@@ -2,10 +2,10 @@
 <html>
     <head>
         <title>{{ title }}</title>
-        <script src="{{ baseurl }}/components/require-built.js"></script>
+        <script src="{{ constant('BASE_URL') }}/components/require-built.js"></script>
         <script>
             require.config({
-                baseUrl: '{{ baseurl }}/components'
+                baseUrl: "{{ constant('BASE_URL') }}/components"
             });
         </script>
         <script>
@@ -20,11 +20,11 @@
                 <!-- 
             {% if app.session.get('user') is null %}
             
-                <li><a href="{{ baseurl }}/login">{{ 'Sign in'|trans }}</a></li>
+                <li><a href="{{ constant('BASE_URL') }}/login">{{ 'Sign in'|trans }}</a></li>
             
             {% else %}
 
-                <li><a href="{{ baseurl }}/logout">{{ 'Sign out'|trans }}</a></li>
+                <li><a href="{{ constant('BASE_URL') }}/logout">{{ 'Sign out'|trans }}</a></li>
 
             {% endif %}
                 -->

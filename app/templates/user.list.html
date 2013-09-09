@@ -2,7 +2,7 @@
 
 {% block nav %}
 		<li>
-			<a href="{{ baseurl }}/user/new">{{ 'Add user'|trans }}</a></td>
+			<a href="{{ constant('BASE_URL') }}/user/new">{{ 'Add user'|trans }}</a></td>
 		</li>
 {% endblock %}
 
@@ -26,7 +26,7 @@
 			<td>{{ user.firstname }}</td>
 			<td>{{ user.lastname }}</td>
 			<td>{{ user.email }}</td>
-			<td><a href="{{ baseurl }}/user/{{ user.id }}">{{ 'show'|trans }}</a></td>
+			<td><a href="{{ constant('BASE_URL') }}/user/{{ user.id }}">{{ 'show'|trans }}</a></td>
 		</tr>
 		{% endfor %}
 	</tbody>
