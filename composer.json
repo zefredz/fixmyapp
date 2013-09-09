@@ -16,6 +16,7 @@
         "symfony/config": "~2.3",
         "symfony/yaml": "~2.3",
         "symfony/security": "~2.3",
+        "symfony/debug": "~2.3",
 
 
         "components/underscore": "1.4.*",
@@ -23,10 +24,6 @@
         "components/jquery": "1.10.*",
 
         "pimple/pimple": "1.*"
-    },
-
-    "config": {
-        "bin-dir": "bin/"
     },
 
     "autoload": {
