@@ -6,7 +6,7 @@ $userController->get( '/', function( Silex\Application $app ) {
 
     $users = $app['users.repository']->find_many();
 
-    return $app['twig']->render( 'user.list.html',  array( 'title' => $app['translator']->trans('User list'), 'users' => $users, 'baseurl' => BASE_URL ) );
+    return $app->render( 'user.list.html',  array( 'title' => $app['translator']->trans('User list'), 'users' => $users, 'baseurl' => BASE_URL ) );
 
 } );
 
@@ -18,7 +18,7 @@ $userController->match( '/new', function( Silex\Application $app ) {
         'email' => 'Your email',
     );
 
-    $form = $app['form.factory']->createBuilder('form', $data)
+    $form = $app->form($data)
         ->setAction(BASE_URL.'/user/new')
         ->add('firstname')
         ->add('lastname')
@@ -44,7 +44,7 @@ $userController->match( '/new', function( Silex\Application $app ) {
         }
     }
 
-    return $app['twig']->render('user.new.html', array( 'title' => $app['translator']->trans('New user'), 'form' => $form->createView(), 'baseurl' => BASE_URL ) );
+    return $app->render('user.new.html', array( 'title' => $app['translator']->trans('New user'), 'form' => $form->createView(), 'baseurl' => BASE_URL ) );
 
 } ); //->before( $checkLogin ); // adding users requires login
 
@@ -54,11 +54,11 @@ $userController->get( '/{id}', function( Silex\Application $app, $id ) {
 
     if( $user )
     {
-        return $app['twig']->render( 'user.html',  array( 'title' => $app['translator']->trans('User profile'), 'user' => $user, 'baseurl' => BASE_URL ) );
+        return $app->render( 'user.html',  array( 'title' => $app['translator']->trans('User profile'), 'user' => $user, 'baseurl' => BASE_URL ) );
     }
     else
     {
-        return $app['twig']->render( 'error.html', array('title' => $app['translator']->trans('An error occured') , 'error_message' => $app['translator']->trans('User not found %user_id%', array( '%user_id%' => $id ) ), 'baseurl' => BASE_URL ) );
+        return $app->render( 'error.html', array('title' => $app['translator']->trans('An error occured') , 'error_message' => $app['translator']->trans('User not found %user_id%', array( '%user_id%' => $id ) ), 'baseurl' => BASE_URL ) );
     }
 
 } )->assert('id', '\d+');

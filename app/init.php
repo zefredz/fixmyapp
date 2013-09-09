@@ -32,7 +32,6 @@ ORM::configure('driver_options', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAME
 
 // Initialize Silex
 
-// $app = new Silex\Application();
 $app = new FixMyApp\Application();
 
 if ( $_CONFIG->runtime->debug === true )
