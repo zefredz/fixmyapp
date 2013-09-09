@@ -17,6 +17,7 @@
     <body>
         <nav>
             <ul>
+                <!-- 
             {% if app.session.get('user') is null %}
             
                 <li><a href="{{ baseurl }}/login">{{ 'Sign in'|trans }}</a></li>
@@ -26,6 +27,10 @@
                 <li><a href="{{ baseurl }}/logout">{{ 'Sign out'|trans }}</a></li>
 
             {% endif %}
+                -->
+                <li>
+                    <a href="{{ url('homepage') }}">{{ 'Homepage'|trans }}</a>
+                </li>
             </ul>
         </nav>
         {% block body %}{% endblock %}

@@ -15,7 +15,7 @@ $app->get( '/', function( Silex\Application $app ) {
 
     return $app['twig']->render( 'index.html', array('title' => $app['translator']->trans('FixMyApp') , 'baseurl' => BASE_URL ) );
 
-} );
+} )->bind('homepage');
 
 $app->mount( '/user', include __DIR__ . '/app/routes/user.php' );
 
