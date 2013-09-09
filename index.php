@@ -13,7 +13,7 @@ require_once __DIR__ . '/app/init.php';
     
 $app->get( '/', function( Silex\Application $app ) {
 
-    return $app['twig']->render( 'index.html', array('title' => $app['translator']->trans('FixMyApp') , 'baseurl' => BASE_URL ) );
+    return $app->render( 'index.html', array('title' => $app->trans('FixMyApp') , 'baseurl' => BASE_URL ) );
 
 } )->bind('homepage');
 
