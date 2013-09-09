@@ -1,14 +1,22 @@
 <?php namespace FixMyApp;
 
+/**
+ * Configuration object
+ */
 class Config
 {
     protected $_properties;
 
+    /**
+     * @param array $properties multi-level associative array storing the configuration options
+     */
     public function __construct( $properties )
     {
         $this->_properties = $properties;
     }
 
+    // Magic
+    
     public function __get( $name )
     {
         if ( isset( $this->_properties[$name] ) )
