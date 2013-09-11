@@ -20,16 +20,6 @@ define ( 'BASE_URL', dirname($_SERVER['SCRIPT_NAME']) != '/' ? dirname($_SERVER[
 $yamlParser = new Symfony\Component\Yaml\Parser();
 $GLOBALS['_CONFIG'] = new FixMyApp\Config($yamlParser->parse(file_get_contents(__DIR__.'/config.yml')));
 
-// init database
-
-ORM::configure(array(
-    'connection_string' => $_CONFIG->database->connection_string,
-    'username' => $_CONFIG->database->username,
-    'password' => $_CONFIG->database->password
-));
-
-ORM::configure('driver_options', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
-
 // Initialize Silex
 
 if ( version_compare( PHP_VERSION, '5.4.0', '<' ) ) 
@@ -73,11 +63,6 @@ $app->register(new Silex\Provider\HttpCacheServiceProvider(), array(
 ));
 
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
-
-/* $app->register(new Silex\Provider\SecurityServiceProvider(), array(
-    'security.firewalls' => array(
-    )
-)); */
 
 
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
@@ -130,6 +115,20 @@ $checkLogin = $GLOBALS['checkLogin'] = function() use ($app) {
         return $app->redirect('/login');
     }
 };
+
+// init database
+
+ORM::configure(array(
+    'connection_string' => $_CONFIG->database->connection_string,
+    'username' => $_CONFIG->database->username,
+    'password' => $_CONFIG->database->password
+));
+
+ORM::configure('driver_options', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+ORM::configure( 'logging', true );
+ORM::configure( 'logger', function( $str_to_log ) use ( $app ) {
+    $app['monolog']->addDebug( $str_to_log );
+} );
 
 // define application repositories
 
