@@ -32,7 +32,14 @@ ORM::configure('driver_options', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAME
 
 // Initialize Silex
 
-$app = new FixMyApp\Application();
+if ( version_compare( PHP_VERSION, '5.4.0', '<' ) ) 
+{
+    $app = new FixMyApp\ApplicationCompat();
+}
+else
+{
+    $app = new FixMyApp\Application();
+}
 
 if ( $_CONFIG->runtime->debug === true )
 {
