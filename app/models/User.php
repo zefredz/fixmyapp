@@ -1,7 +1,7 @@
 <?php
 
 /**
- * PAris model to represent a user
+ * Paris model to represent a user
  */
 class User extends Model 
 {
