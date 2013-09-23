@@ -11,7 +11,7 @@
 
 {% block body %}
 <!-- user template -->
-<h1>{{ app.translator.trans("Hello %firstname% %lastname%", { '%firstname%': user.firstname, '%lastname%': user.lastname}) }}</h1>
+<h1>{{ app.trans("Hello %firstname% %lastname%", { '%firstname%': user.firstname, '%lastname%': user.lastname}) }}</h1>
 <dl>
     <dt>{{ 'First name'|trans }}</dt>
     <dd>{{ user.firstname }}</dd>
