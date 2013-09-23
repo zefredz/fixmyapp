@@ -14,7 +14,13 @@ Web application to submit and vote for feature requests.
 
 ## Install
 
-__There is no install script yet !__ Read app/setup/INSTALL.md for instructions.
+__There is no install script yet !__ 
+
+  git clone REPO_URL fixmyapp
+  cd fixmyapp
+  composer install
+
+Read app/setup/INSTALL.md for more instructions
 
 ## Run the application
 

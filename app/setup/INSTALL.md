@@ -4,6 +4,11 @@ There is no automatic install yet.
 
 To install do the following :
 
+  git clone REPO_URL fixmyapp
+  cd fixmyapp
+  composer install
+  mkdir -p cache/templates
+  
 * Install composer (go to [getcomposer.org](http://getcomposer.org) for more details)
 * Run 'composer install' from the fixmyapp folder
 * Create the following folder : cache/templates and give php the right to write in it
