@@ -1,10 +1,12 @@
-<?php
+<?php namespace FixMyApp\Models;
 
 /**
  * Paris model to represent a user
  */
-class User extends Model 
+class User extends \Model 
 {
+    public static $_table = 'user';
+
     /**
      * Helper to get the list of propositions posted by the user
      * @return Proposition Paris Model

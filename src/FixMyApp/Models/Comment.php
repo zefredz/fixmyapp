@@ -1,10 +1,11 @@
-<?php
+<?php namespace FixMyApp\Models;
 
 /**
  * Paris model to represent a comment
  */
-class Comment extends Model
+class Comment extends \Model
 {
+    public static $_table = 'comment';
     /**
      * Helper to get the related proposition
      * @retrun Proposition Paris Model

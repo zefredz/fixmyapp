@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/classes/autoload.php';
+require_once __DIR__ . '/../src/autoload.php';
 
 // temporary code will be moved to installer
 
@@ -132,6 +132,6 @@ ORM::configure( 'logger', function( $str_to_log ) use ( $app ) {
 
 // define application repositories
 
-$app['users.repository'] = Model::factory('User');
-$app['propositions.repository'] = Model::factory('Proposition');
-$app['comment.repository'] = Model::factory('Comment');
+$app['users.repository'] = Model::factory('\\FixMyApp\\Models\\User');
+$app['propositions.repository'] = Model::factory('\\FixMyApp\\Models\\Proposition');
+$app['comment.repository'] = Model::factory('\\FixMyApp\\Models\\Comment');
