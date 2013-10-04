@@ -68,6 +68,7 @@ CREATE  TABLE IF NOT EXISTS `fixmyapp`.`authentication` (
   `id` INT NOT NULL ,
   `username` VARCHAR(255) NOT NULL ,
   `password` VARCHAR(255) NULL ,
+  `roles` varchar(255) NOT NULL,
   `user_id` INT UNSIGNED NOT NULL ,
   PRIMARY KEY (`id`) ,
   UNIQUE INDEX `username_UNIQUE` (`username` ASC) ,

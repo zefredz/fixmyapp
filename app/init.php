@@ -130,6 +130,10 @@ ORM::configure( 'logger', function( $str_to_log ) use ( $app ) {
     $app['monolog']->addDebug( $str_to_log );
 } );
 
+// authentication
+
+$app['authentication.table'] =  ORM::for_table('authentication');
+
 // define application repositories
 
 $app['users.repository'] = Model::factory('\\FixMyApp\\Models\\User');
