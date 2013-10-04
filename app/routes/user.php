@@ -6,7 +6,7 @@ $userController->get( '/', function( Silex\Application $app ) {
 
     $users = $app['users.repository']->find_many();
 
-    return $app->render( 'user.list.html',  array( 'title' => $app['translator']->trans('User list'), 'users' => $users ) );
+    return $app->render( 'user.list.twig',  array( 'title' => $app['translator']->trans('User list'), 'users' => $users ) );
 
 } );
 
@@ -44,7 +44,7 @@ $userController->match( '/new', function( Silex\Application $app ) {
         }
     }
 
-    return $app->render('user.new.html', array( 'title' => $app->trans('New user'), 'form' => $form->createView() ) );
+    return $app->render('user.new.twig', array( 'title' => $app->trans('New user'), 'form' => $form->createView() ) );
 
 } ); //->before( $checkLogin ); // adding users requires login
 
@@ -54,11 +54,11 @@ $userController->get( '/{id}', function( Silex\Application $app, $id ) {
 
     if( $user )
     {
-        return $app->render( 'user.html',  array( 'title' => $app->trans('User profile'), 'user' => $user ) );
+        return $app->render( 'user.twig',  array( 'title' => $app->trans('User profile'), 'user' => $user ) );
     }
     else
     {
-        return $app->render( 'error.html', array('title' => $app->trans('An error occured') , 'error_message' => $app->trans('User not found %user_id%', array( '%user_id%' => $id ) ) ) );
+        return $app->render( 'error.twig', array('title' => $app->trans('An error occured') , 'error_message' => $app->trans('User not found %user_id%', array( '%user_id%' => $id ) ) ) );
     }
 
 } )->assert('id', '\d+');
