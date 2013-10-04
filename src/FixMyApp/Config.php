@@ -42,4 +42,16 @@ class Config
     {
         throw new \Exception("The configuration is read-only");
     }
+
+    public function asArray()
+    {
+        if ( is_array( $this->_properties ) )
+        {
+            return $this->_properties;
+        }
+        else
+        {
+            return array($this->_properties);
+        }
+    }
 }
