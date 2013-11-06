@@ -11,7 +11,7 @@ require_once __DIR__ . '/app/init.php';
     $user->save();
 */
     
-$app->get( '/', function( Silex\Application $app ) {
+$app->get( '/', function( \Silex\Application $app ) {
 
     return $app->render( 'index.twig', array('title' => $app->trans('FixMyApp') ) );
 

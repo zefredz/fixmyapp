@@ -2,7 +2,7 @@
 
 $userController = $app['controllers_factory'];
 
-$userController->get( '/', function( Silex\Application $app ) {
+$userController->get( '/', function( \Silex\Application $app ) {
 
     $users = $app['users.repository']->find_many();
 
@@ -10,7 +10,7 @@ $userController->get( '/', function( Silex\Application $app ) {
 
 } );
 
-$userController->match( '/new', function( Silex\Application $app ) {
+$userController->match( '/new', function( \Silex\Application $app ) {
 
     $data = array(
         'firstname' => 'Your first name',
@@ -48,7 +48,7 @@ $userController->match( '/new', function( Silex\Application $app ) {
 
 } ); //->before( $checkLogin ); // adding users requires login
 
-$userController->get( '/{id}', function( Silex\Application $app, $id ) {
+$userController->get( '/{id}', function( \Silex\Application $app, $id ) {
 
     $user = $app['users.repository']->find_one($id);
 

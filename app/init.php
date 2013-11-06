@@ -17,18 +17,18 @@ if ( ! file_exists(__DIR__.'/../cache/http') )
 
 define ( 'BASE_URL', dirname($_SERVER['SCRIPT_NAME']) != '/' ? dirname($_SERVER['SCRIPT_NAME']) : '' );
 
-$yamlParser = new Symfony\Component\Yaml\Parser();
-$GLOBALS['_CONFIG'] = new FixMyApp\Config($yamlParser->parse(file_get_contents(__DIR__.'/config.yml')));
+$yamlParser = new \Symfony\Component\Yaml\Parser();
+$GLOBALS['_CONFIG'] = new \FixMyApp\Config($yamlParser->parse(file_get_contents(__DIR__.'/config.yml')));
 
 // Initialize Silex
 
 if ( version_compare( PHP_VERSION, '5.4.0', '<' ) ) 
 {
-    $app = new FixMyApp\ApplicationCompat();
+    $app = new \FixMyApp\ApplicationCompat();
 }
 else
 {
-    $app = new FixMyApp\Application();
+    $app = new \FixMyApp\Application();
 }
 
 if ( $_CONFIG->runtime->debug === true )
@@ -38,18 +38,18 @@ if ( $_CONFIG->runtime->debug === true )
 
 // Register Silex service providers
 
-$app->register(new Silex\Provider\MonologServiceProvider(), array(
+$app->register(new \Silex\Provider\MonologServiceProvider(), array(
     'monolog.logfile' => __DIR__.'/fixmyapp.log',
-    'monolog.level' => $_CONFIG->runtime->debug === true ? Monolog\Logger::DEBUG : Monolog\Logger::ERROR,
+    'monolog.level' => $_CONFIG->runtime->debug === true ? \Monolog\Logger::DEBUG : \Monolog\Logger::ERROR,
     'monolog.name' => 'fixmyapp'
 ));
 
-$app->register(new Silex\Provider\TranslationServiceProvider(), array(
+$app->register(new \Silex\Provider\TranslationServiceProvider(), array(
     'locale_fallback' => 'en'
 ));
 
 $app['translator'] = $app->share($app->extend('translator', function($translator, $app) {
-    $translator->addLoader('yaml', new Symfony\Component\Translation\Loader\YamlFileLoader());
+    $translator->addLoader('yaml', new \Symfony\Component\Translation\Loader\YamlFileLoader());
 
     $translator->addResource('yaml', __DIR__.'/locales/en.messages.yml', 'en');
     $translator->addResource('yaml', __DIR__.'/locales/en.errors.yml', 'en');
@@ -58,29 +58,29 @@ $app['translator'] = $app->share($app->extend('translator', function($translator
     return $translator;
 }));
 
-$app->register(new Silex\Provider\HttpCacheServiceProvider(), array(
+$app->register(new \Silex\Provider\HttpCacheServiceProvider(), array(
     'http_cache.cache_dir' => __DIR__.'/../cache/http',
 ));
 
-$app->register(new Silex\Provider\UrlGeneratorServiceProvider());
+$app->register(new \Silex\Provider\UrlGeneratorServiceProvider());
 
 
-$app->register(new Silex\Provider\TwigServiceProvider(), array(
+$app->register(new \Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/templates',
     'twig.options' => array(
         'cache' => __DIR__.'/../cache/templates',
         'debug' => true ),
 ));
 
-$app->register( new Silex\Provider\FormServiceProvider() );
-$app->register( new Silex\Provider\ValidatorServiceProvider() );
-$app->register( new Silex\Provider\SwiftmailerServiceProvider() );
+$app->register( new \Silex\Provider\FormServiceProvider() );
+$app->register( new \Silex\Provider\ValidatorServiceProvider() );
+$app->register( new \Silex\Provider\SwiftmailerServiceProvider() );
 
 // Register authentication controller
 
-$app->register( new Silex\Provider\SessionServiceProvider() );
+$app->register( new \Silex\Provider\SessionServiceProvider() );
 
-$app->get( '/login', function( Silex\Application $app ) {
+$app->get( '/login', function( \Silex\Application $app ) {
     $username = $app['request']->server->get('PHP_AUTH_USER', false);
     $password = $app['request']->server->get('PHP_AUTH_PW');
 
@@ -91,7 +91,7 @@ $app->get( '/login', function( Silex\Application $app ) {
         return $app->redirect('/');
     }
 
-    $response = new Symfony\Component\HttpFoundation\Response();
+    $response = new \Symfony\Component\HttpFoundation\Response();
     $response->headers->set( "WWW-Authenticate", sprintf('Basic realm="%s"', 'site_login') );
     $response->setStatusCode(401, 'Please sign in');
     return $response;
@@ -99,7 +99,7 @@ $app->get( '/login', function( Silex\Application $app ) {
 
 // This is useless in HTTP auth since the browser resend automatically the login/password...
 
-$app->get( '/logout', function( Silex\Application $app ) {
+$app->get( '/logout', function( \Silex\Application $app ) {
 
     if ( $user = $app['session']->get('user') )
     {
@@ -124,7 +124,7 @@ Idiorm\Dbal\ORM::configure(array(
     'password' => $_CONFIG->database->password
 ));
 
-Idiorm\Dbal\ORM::configure('driver_options', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+Idiorm\Dbal\ORM::configure('driver_options', array(\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
 Idiorm\Dbal\ORM::configure( 'logging', true );
 Idiorm\Dbal\ORM::configure( 'logger', function( $str_to_log ) use ( $app ) {
     $app['monolog']->addDebug( $str_to_log );
