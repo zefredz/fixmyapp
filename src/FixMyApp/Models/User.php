@@ -1,9 +1,11 @@
 <?php namespace FixMyApp\Models;
 
+use Paris\Dbal\Model;
+
 /**
  * Paris model to represent a user
  */
-class User extends \Model 
+class User extends Model 
 {
     public static $_table = 'user';
 

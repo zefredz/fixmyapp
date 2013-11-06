@@ -1,9 +1,11 @@
 <?php namespace FixMyApp\Models;
 
+use Paris\Dbal\Model;
+
 /**
  * Paris model to represent a comment
  */
-class Comment extends \Model
+class Comment extends Model
 {
     public static $_table = 'comment';
     /**
