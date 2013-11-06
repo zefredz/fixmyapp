@@ -96,6 +96,19 @@ $app->get( '/login', function( \Silex\Application $app ) {
     return $response;
 });
 
+// register dbal
+
+$app->register(new \Silex\Provider\DoctrineServiceProvider(), array(
+    'db.options' => array (
+        'driver'    => $_CONFIG->database->driver,
+        'host'      => $_CONFIG->database->host,
+        'dbname'    => $_CONFIG->database->dbname,
+        'user'      => $_CONFIG->database->username,
+        'password'  => $_CONFIG->database->password,
+        'charset'   => $_CONFIG->database->charset,      
+    ),
+));
+
 // This is useless in HTTP auth since the browser resend automatically the login/password...
 
 $app->get( '/logout', function( \Silex\Application $app ) {

@@ -1,6 +1,10 @@
 database:
   connection_string: mysql:host=localhost;dbname=fixmyapp
+  driver: pdo_mysql
+  host: localhost
+  dbname: fixmyapp
   username: fixmyapp
   password: fixmyapp
+  charset: utf8
 runtime:
   debug: true
