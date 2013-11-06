@@ -118,24 +118,24 @@ $checkLogin = $GLOBALS['checkLogin'] = function() use ($app) {
 
 // init database
 
-ORM::configure(array(
+Idiorm\Dbal\ORM::configure(array(
     'connection_string' => $_CONFIG->database->connection_string,
     'username' => $_CONFIG->database->username,
     'password' => $_CONFIG->database->password
 ));
 
-ORM::configure('driver_options', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
-ORM::configure( 'logging', true );
-ORM::configure( 'logger', function( $str_to_log ) use ( $app ) {
+Idiorm\Dbal\ORM::configure('driver_options', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+Idiorm\Dbal\ORM::configure( 'logging', true );
+Idiorm\Dbal\ORM::configure( 'logger', function( $str_to_log ) use ( $app ) {
     $app['monolog']->addDebug( $str_to_log );
 } );
 
 // authentication
 
-$app['authentication.table'] =  ORM::for_table('authentication');
+$app['authentication.table'] =  Idiorm\Dbal\ORM::for_table('authentication');
 
 // define application repositories
 
-$app['users.repository'] = Model::factory('\\FixMyApp\\Models\\User');
-$app['propositions.repository'] = Model::factory('\\FixMyApp\\Models\\Proposition');
-$app['comment.repository'] = Model::factory('\\FixMyApp\\Models\\Comment');
+$app['users.repository'] = Paris\Dbal\Model::factory('\\FixMyApp\\Models\\User');
+$app['propositions.repository'] = Paris\Dbal\Model::factory('\\FixMyApp\\Models\\Proposition');
+$app['comment.repository'] = Paris\Dbal\Model::factory('\\FixMyApp\\Models\\Comment');
