@@ -21,6 +21,17 @@
         "symfony/process": "~2.3",
         "doctrine/dbal": "2.2.*",
 
+        "stack/builder": "1.0.*@dev",
+        "stack/session": "1.0.*@dev",
+        "stack/run": "1.0.*@dev",
+        "stack/url-map": "1.0.*@dev",
+        "stack/callable-http-kernel": "1.0.*@dev",
+        "stack/lazy-http-kernel": "1.0.*@dev",
+        "igorw/stack-oauth": "1.0.*@dev",
+        "league/stack-robots": "1.0.*@dev",
+        "atst/stack-backstage": "1.0.*@dev",
+        "alsar/stack-ip-restrict": "dev-master",
+
 
         "components/underscore": "1.4.*",
         "components/modernizr": "2.6.*",
