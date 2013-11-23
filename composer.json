@@ -21,6 +21,8 @@
         "symfony/process": "~2.3",
         "doctrine/dbal": "2.2.*",
 
+        "mheap/silex-assetic": "~1.0",
+
         "stack/builder": "1.0.*@dev",
         "stack/session": "1.0.*@dev",
         "stack/run": "1.0.*@dev",
