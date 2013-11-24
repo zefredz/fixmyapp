@@ -17,6 +17,8 @@ $app->get( '/', function( \Silex\Application $app ) {
 
 } )->bind('homepage');
 
+$app->mount( '/install', include __DIR__ . '/app/setup/schema.install.php' );
+
 $app->mount( '/user', include __DIR__ . '/app/routes/user.php' );
 
 $app->run();

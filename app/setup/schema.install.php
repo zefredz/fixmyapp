@@ -1,59 +1,86 @@
 <?php
 
-require_once __DIR__ . '/../init.php';
+$installController = $app['controllers_factory'];
 
-$schema = $app['db']->getSchemaManager()->createSchema();
+$installController->get( '/', function( \Silex\Application $app ) {
 
-// user table
+	$schema = $app['db']->getSchemaManager()->createSchema();
 
-$usersTable = $schema->createTable("user");
+	$platform = $app['db']->getDatabasePlatform();
 
-$usersTable->addColumn("id", "integer", array("unsigned" => true));
-$usersTable->addColumn("firstname", "string", array("length" => 64));
-$usersTable->addColumn("lastname", "string", array("length" => 64));
-$usersTable->addColumn("email", "string", array("length" => 256));
+	if ( ! $schema->hasTable('user') )
+	{
+		$usersTable = $schema->createTable("user");
 
-$usersTable->setPrimaryKey(array("id"));
+		$usersTable->addColumn("id", "integer", array("unsigned" => true));
+		$usersTable->addColumn("firstname", "string", array("length" => 64));
+		$usersTable->addColumn("lastname", "string", array("length" => 64));
+		$usersTable->addColumn("email", "string", array("length" => 256));
 
-// authentication
+		$usersTable->setPrimaryKey(array("id"));
+	}
+	else
+	{
+		$schema->dropTable('user');
+	}
 
-$loginTable = $schema->createTable("authentication");
+	// authentication
 
-$loginTable->addColumn("user_id", "integer", array("unsigned" => true));
-$loginTable->addColumn("username", "string", array("length" => 64));
-$loginTable->addColumn("password", "string", array("length" => 64));
+	if ( ! $schema->hasTable('authentication') )
+	{
+		$loginTable = $schema->createTable("authentication");
 
-$loginTable->addUniqueIndex(array("username"));
+		$loginTable->addColumn("user_id", "integer", array("unsigned" => true));
+		$loginTable->addColumn("username", "string", array("length" => 64));
+		$loginTable->addColumn("password", "string", array("length" => 64));
 
-$loginTable->setPrimaryKey(array("user_id"));
+		$loginTable->addUniqueIndex(array("username"));
 
-$loginTable->addForeignKeyConstraint(
-	$usersTable, 
-    array("user_id"), 
-    array("id"), 
-    array("onDelete" => "CASCADE")
-);
+		$loginTable->setPrimaryKey(array("user_id"));
 
-// role
+		$loginTable->addForeignKeyConstraint(
+			$usersTable, 
+		    array("user_id"), 
+		    array("id"), 
+		    array("onDelete" => "CASCADE")
+		);
+	}
+	else
+	{
+		$schema->dropTable('authentication');
+	}
 
-$roleTable = $schema->createTable("role");
+	// role
 
-$roleTable->addColumn("user_id", "integer", array("unsigned" => true));
-$roleTable->addColumn("role", "string", array("length" => 64));
+	if ( ! $schema->hasTable('role') )
+	{
 
-$roleTable->setPrimaryKey(array("user_id"));
+		$roleTable = $schema->createTable("role");
 
-$roleTable->addForeignKeyConstraint(
-	$usersTable, 
-    array("user_id"), 
-    array("id"), 
-    array("onDelete" => "CASCADE")
-);
+		$roleTable->addColumn("user_id", "integer", array("unsigned" => true));
+		$roleTable->addColumn("role", "string", array("length" => 64));
 
-$platform = $app['db']->getDatabasePlatform();
+		$roleTable->setPrimaryKey(array("user_id"));
 
-$queries = $schema->toSql($platform);
+		$roleTable->addForeignKeyConstraint(
+			$usersTable, 
+		    array("user_id"), 
+		    array("id"), 
+		    array("onDelete" => "CASCADE")
+		);
+	}
+	else
+	{
+		$schema->dropTable('role');
+	}
 
-foreach ( $queries as $query ) {
-	$app['db']->executeQuery( $query );
-}
+	$queries = $schema->toSql($platform);
+	
+	foreach ( $queries as $query ) {
+		$app['db']->executeQuery( $query );
+	}
+
+	return $app->render( 'install.twig',  array( 'title' => $app['translator']->trans('Install'), 'queries' => $queries ) );
+} );
+
+return $installController;

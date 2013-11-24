@@ -1,0 +1,17 @@
+{% extends "main.twig" %}
+
+{% block nav %}
+        <li>
+            <a href="{{ constant('BASE_URL') }}">{{ 'Home page'|trans }}</a></td>
+        </li>
+{% endblock %}
+
+{% block body %}
+
+    <h1>{{ 'Installing schema'|trans }}</h1>
+
+    {% for query in queries %}
+    <code>{{ query }}</code>
+    {% endfor %}
+
+{% endblock %}
