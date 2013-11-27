@@ -300,7 +300,7 @@ class Model
      * Getter method, allows $model->get('property') access to data
      */
     public function get($property) 
-
+    {
         return $this->orm->get($property);
     }
 
