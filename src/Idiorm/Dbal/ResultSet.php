@@ -46,7 +46,8 @@ namespace Idiorm\Bdal;
  * A result set class for working with collections of model instances
  * @author Simon Holywell <treffynnon@php.net>
  */
-class ResultSet implements \Countable, \IteratorAggregate, \ArrayAccess, \Serializable {
+class ResultSet implements \Countable, \IteratorAggregate, \ArrayAccess, \Serializable 
+{
     /**
      * The current result set as an array
      * @var array
@@ -57,7 +58,8 @@ class ResultSet implements \Countable, \IteratorAggregate, \ArrayAccess, \Serial
      * Optionally set the contents of the result set by passing in array
      * @param array $results
      */
-    public function __construct(array $results = array()) {
+    public function __construct(array $results = array()) 
+    {
         $this->set_results($results);
     }
 
@@ -65,7 +67,8 @@ class ResultSet implements \Countable, \IteratorAggregate, \ArrayAccess, \Serial
      * Set the contents of the result set by passing in array
      * @param array $results
      */
-    public function set_results(array $results) {
+    public function set_results(array $results) 
+    {
         $this->_results = $results;
     }
 
@@ -73,7 +76,8 @@ class ResultSet implements \Countable, \IteratorAggregate, \ArrayAccess, \Serial
      * Get the current result set as an array
      * @return array
      */
-    public function get_results() {
+    public function get_results() 
+    {
         return $this->_results;
     }
 
@@ -81,7 +85,8 @@ class ResultSet implements \Countable, \IteratorAggregate, \ArrayAccess, \Serial
      * Get the current result set as an array
      * @return array
      */
-    public function as_array() {
+    public function as_array() 
+    {
         return $this->get_results();
     }
     
@@ -89,7 +94,8 @@ class ResultSet implements \Countable, \IteratorAggregate, \ArrayAccess, \Serial
      * Get the number of records in the result set
      * @return int
      */
-    public function count() {
+    public function count() 
+    {
         return count($this->_results);
     }
 
@@ -98,7 +104,8 @@ class ResultSet implements \Countable, \IteratorAggregate, \ArrayAccess, \Serial
      * over the result set.
      * @return \ArrayIterator
      */
-    public function getIterator() {
+    public function getIterator() 
+    {
         return new ArrayIterator($this->_results);
     }
 
@@ -107,7 +114,8 @@ class ResultSet implements \Countable, \IteratorAggregate, \ArrayAccess, \Serial
      * @param int|string $offset
      * @return bool
      */
-    public function offsetExists($offset) {
+    public function offsetExists($offset) 
+    {
         return isset($this->_results[$offset]);
     }
 
@@ -116,7 +124,8 @@ class ResultSet implements \Countable, \IteratorAggregate, \ArrayAccess, \Serial
      * @param int|string $offset
      * @return mixed
      */
-    public function offsetGet($offset) {
+    public function offsetGet($offset) 
+    {
         return $this->_results[$offset];
     }
     
@@ -125,7 +134,8 @@ class ResultSet implements \Countable, \IteratorAggregate, \ArrayAccess, \Serial
      * @param int|string $offset
      * @param mixed $value
      */
-    public function offsetSet($offset, $value) {
+    public function offsetSet($offset, $value) 
+    {
         $this->_results[$offset] = $value;
     }
 
@@ -133,7 +143,8 @@ class ResultSet implements \Countable, \IteratorAggregate, \ArrayAccess, \Serial
      * ArrayAccess
      * @param int|string $offset
      */
-    public function offsetUnset($offset) {
+    public function offsetUnset($offset) 
+    {
         unset($this->_results[$offset]);
     }
 
@@ -141,7 +152,8 @@ class ResultSet implements \Countable, \IteratorAggregate, \ArrayAccess, \Serial
      * Serializable
      * @return string
      */
-    public function serialize() {
+    public function serialize() 
+    {
         return serialize($this->_results);
     }
 
@@ -150,7 +162,8 @@ class ResultSet implements \Countable, \IteratorAggregate, \ArrayAccess, \Serial
      * @param string $serialized
      * @return array
      */
-    public function unserialize($serialized) {
+    public function unserialize($serialized) 
+    {
         return unserialize($serialized);
     }
 
@@ -163,10 +176,12 @@ class ResultSet implements \Countable, \IteratorAggregate, \ArrayAccess, \Serial
      * @param array $params
      * @return \Idiorm\Dbal\ResultSet
      */
-    public function __call($method, $params = array()) {
+    public function __call($method, $params = array()) 
+    {
         foreach($this->_results as $model) {
             call_user_func_array(array($model, $method), $params);
         }
+        
         return $this;
     }
 }

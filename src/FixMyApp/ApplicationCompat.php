@@ -1,4 +1,6 @@
-<?php namespace FixMyApp;
+<?php 
+
+namespace FixMyApp;
 
 use Monolog\Logger;
 use Symfony\Component\Form\FormBuilder;

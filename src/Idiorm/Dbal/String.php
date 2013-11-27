@@ -52,7 +52,8 @@ use Idiorm\Dbal\StringException;
  * @author Simon Holywell <treffynnon@php.net>
  * @link http://stackoverflow.com/a/13370709/461813 StackOverflow answer
  */
-class String {
+class String 
+{
     protected $subject;
     protected $search;
     protected $replace;
@@ -62,7 +63,8 @@ class String {
      * @param string $subject
      * @return \self
      */
-    public static function value($subject) {
+    public static function value($subject) 
+    {
         return new self($subject);
     }
 
@@ -74,7 +76,8 @@ class String {
      * @param string $subject
      * @return string
      */
-    public static function str_replace_outside_quotes($search, $replace, $subject) {
+    public static function str_replace_outside_quotes($search, $replace, $subject) 
+    {
         return self::value($subject)->replace_outside_quotes($search, $replace);
     }
 
@@ -82,7 +85,8 @@ class String {
      * Set the base string object
      * @param string $subject
      */
-    public function __construct($subject) {
+    public function __construct($subject) 
+    {
         $this->subject = (string) $subject;
     }
 
@@ -93,9 +97,11 @@ class String {
      * @param string $replace
      * @return string
      */
-    public function replace_outside_quotes($search, $replace) {
+    public function replace_outside_quotes($search, $replace) 
+    {
         $this->search = $search;
         $this->replace = $replace;
+
         return $this->_str_replace_outside_quotes();
     }
 
@@ -106,7 +112,8 @@ class String {
      * @link http://stackoverflow.com/a/13370709/461813 StackOverflow answer
      * @return string
      */
-    protected function _str_replace_outside_quotes(){
+    protected function _str_replace_outside_quotes()
+    {
         $re_valid = '/
             # Validate string having embedded quoted substrings.
             ^                           # Anchor to start of string.
@@ -117,9 +124,11 @@ class String {
             )*                          # Zero or more string chunks.
             \z                          # Anchor to end of string.
             /sx';
+
         if (!preg_match($re_valid, $this->subject)) {
             throw new StringException("Subject string is not valid in the replace_outside_quotes context.");
         }
+
         $re_parse = '/
             # Match one chunk of a valid string having embedded quoted substrings.
               (                         # Either $1: Quoted chunk.
@@ -128,6 +137,7 @@ class String {
               )                         # End $1: Quoted chunk.
             | ([^\'"\\\\]+)             # or $2: an unquoted chunk (no escapes).
             /sx';
+
         return preg_replace_callback($re_parse, array($this, '_str_replace_outside_quotes_cb'), $this->subject);
     }
 
@@ -139,9 +149,11 @@ class String {
      * @param array $matches
      * @return string
      */
-    protected function _str_replace_outside_quotes_cb($matches) {
+    protected function _str_replace_outside_quotes_cb($matches) 
+    {
         // Return quoted string chunks (in group $1) unaltered.
         if ($matches[1]) return $matches[1];
+        
         // Process only unquoted chunks (in group $2).
         return preg_replace('/'. preg_quote($this->search, '/') .'/',
             $this->replace, $matches[2]);

@@ -1,4 +1,6 @@
-<?php namespace FixMyApp;
+<?php 
+
+namespace FixMyApp;
 
 class Application extends \Silex\Application
 {

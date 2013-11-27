@@ -51,7 +51,8 @@ use Idiorm\Dbal\ORM;
  * directly. It is used internally by the Model base
  * class.
  */
-class ORMWrapper extends ORM {
+class ORMWrapper extends ORM 
+{
 
     /**
      * The wrapped find_one and find_many classes will
@@ -63,7 +64,8 @@ class ORMWrapper extends ORM {
      * Set the name of the class which the wrapped
      * methods should return instances of.
      */
-    public function set_class_name($class_name) {
+    public function set_class_name($class_name) 
+    {
         $this->_class_name = $class_name;
     }
 
@@ -76,10 +78,13 @@ class ORMWrapper extends ORM {
      * after the name of the filter will be passed to the called
      * filter function as arguments after the ORM class.
      */
-    public function filter() {
+    public function filter() 
+    {
         $args = func_get_args();
         $filter_function = array_shift($args);
+
         array_unshift($args, $this);
+
         if (method_exists($this->_class_name, $filter_function)) {
             return call_user_func_array(array($this->_class_name, $filter_function), $args);
         }
@@ -92,8 +97,10 @@ class ORMWrapper extends ORM {
      * A repeat of content in parent::for_table, so that
      * created class is ORMWrapper, not ORM
      */
-    public static function for_table($table_name, $connection_name = parent::DEFAULT_CONNECTION) {
+    public static function for_table($table_name, $connection_name = parent::DEFAULT_CONNECTION) 
+    {
         self::_setup_db($connection_name);
+
         return new self($table_name, array(), $connection_name);
     }
 
@@ -102,12 +109,15 @@ class ORMWrapper extends ORM {
      * associated with this wrapper and populate
      * it with the supplied Idiorm instance.
      */
-    protected function _create_model_instance($orm) {
+    protected function _create_model_instance($orm) 
+    {
         if ($orm === false) {
             return false;
         }
+
         $model = new $this->_class_name();
         $model->set_orm($orm);
+
         return $model;
     }
 
@@ -116,7 +126,8 @@ class ORMWrapper extends ORM {
      * an instance of the class associated with
      * this wrapper instead of the raw ORM class.
      */
-    public function find_one($id=null) {
+    public function find_one($id=null) 
+    {
         return $this->_create_model_instance(parent::find_one($id));
     }
 
@@ -125,11 +136,14 @@ class ORMWrapper extends ORM {
      * an array of instances of the class associated
      * with this wrapper instead of the raw ORM class.
      */
-    public function find_many() {
+    public function find_many() 
+    {
         $results = parent::find_many();
+
         foreach($results as $key => $result) {
             $results[$key] = $this->_create_model_instance($result);
         }
+
         return $results;
     }
 
@@ -138,7 +152,8 @@ class ORMWrapper extends ORM {
      * empty instance of the class associated with
      * this wrapper instead of the raw ORM class.
      */
-    public function create($data=null) {
+    public function create($data=null) 
+    {
         return $this->_create_model_instance(parent::create($data));
     }
 }
