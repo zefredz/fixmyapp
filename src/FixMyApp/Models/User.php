@@ -1,4 +1,6 @@
-<?php namespace FixMyApp\Models;
+<?php 
+
+namespace FixMyApp\Models;
 
 use Paris\Dbal\Model;
 

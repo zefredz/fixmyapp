@@ -1,4 +1,6 @@
-<?php namespace FixMyApp\User;
+<?php 
+
+namespace FixMyApp\User;
 
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -21,8 +23,7 @@ class UserProvider implements UserProviderInterface
     {
         $user = $this->conn->where( 'username', $username )->find_one();
 
-        if ( $user )
-        {
+        if (!$user) {
             throw new UsernameNotFoundException(sprintf('Username "%s" does not exist.', $username));
         }
 

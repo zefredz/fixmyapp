@@ -1,4 +1,5 @@
-<?php namespace FixMyApp;
+<?php 
+namespace FixMyApp;
 
 /**
  * Configuration object
@@ -19,38 +20,28 @@ class Config
     
     public function __get( $name )
     {
-        if ( isset( $this->_properties[$name] ) )
-        {
-            if ( is_array( $this->_properties[$name] ) )
-            {
-                $props = new self( $this->_properties[$name] );
-
+        if (isset($this->_properties[$name])) {
+            if (is_array($this->_properties[$name])) {
+                $props = new self($this->_properties[$name]);
                 return $props;
-            }
-            else
-            {
+            } else {
                 return $this->_properties[$name];
             }
-        }
-        else
-        {
+        } else {
             throw new \Exception("Property {$name} does not exists");
         }
     }
 
-    public function __set( $name, $value )
+    public function __set($name, $value)
     {
         throw new \Exception("The configuration is read-only");
     }
 
     public function asArray()
     {
-        if ( is_array( $this->_properties ) )
-        {
+        if (is_array($this->_properties)) {
             return $this->_properties;
-        }
-        else
-        {
+        } else {
             return array($this->_properties);
         }
     }
