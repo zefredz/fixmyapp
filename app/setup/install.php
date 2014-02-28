@@ -7,80 +7,91 @@ $installController->get( '/', function( \Silex\Application $app ) {
 	$schema = $app['db']->getSchemaManager()->createSchema();
 
 	$platform = $app['db']->getDatabasePlatform();
-
-	if ( ! $schema->hasTable('user') )
+	
+	$dropNeeded = false;
+	
+	if ( $schema->hasTable('user') )
 	{
-		$usersTable = $schema->createTable("user");
-
-		$usersTable->addColumn("id", "integer", array("unsigned" => true));
-		$usersTable->addColumn("firstname", "string", array("length" => 64));
-		$usersTable->addColumn("lastname", "string", array("length" => 64));
-		$usersTable->addColumn("email", "string", array("length" => 256));
-
-		$usersTable->setPrimaryKey(array("id"));
+	    $schema->dropTable('user');
+	    $dropNeeded = true;
 	}
-	else
-	{
-		$schema->dropTable('user');
-	}
+
+	$usersTable = $schema->createTable("user");
+
+	$usersTable->addColumn("id", "integer", array("unsigned" => true));
+	$usersTable->addColumn("firstname", "string", array("length" => 64));
+	$usersTable->addColumn("lastname", "string", array("length" => 64));
+	$usersTable->addColumn("email", "string", array("length" => 256));
+
+	$usersTable->setPrimaryKey(array("id"));
 
 	// authentication
-
-	if ( ! $schema->hasTable('authentication') )
+	
+	if ( $schema->hasTable('authentication') )
 	{
-		$loginTable = $schema->createTable("authentication");
-
-		$loginTable->addColumn("user_id", "integer", array("unsigned" => true));
-		$loginTable->addColumn("username", "string", array("length" => 64));
-		$loginTable->addColumn("password", "string", array("length" => 64));
-
-		$loginTable->addUniqueIndex(array("username"));
-
-		$loginTable->setPrimaryKey(array("user_id"));
-
-		$loginTable->addForeignKeyConstraint(
-			$usersTable, 
-		    array("user_id"), 
-		    array("id"), 
-		    array("onDelete" => "CASCADE")
-		);
-	}
-	else
-	{
-		$schema->dropTable('authentication');
+	    $schema->dropTable('authentication');
+	    $dropNeeded = true;
 	}
 
+	
+	$loginTable = $schema->createTable("authentication");
+
+	$loginTable->addColumn("user_id", "integer", array("unsigned" => true));
+	$loginTable->addColumn("username", "string", array("length" => 64));
+	$loginTable->addColumn("password", "string", array("length" => 64));
+
+	$loginTable->addUniqueIndex(array("username"));
+
+	$loginTable->setPrimaryKey(array("user_id"));
+
+	$loginTable->addForeignKeyConstraint(
+		$usersTable, 
+	    array("user_id"), 
+	    array("id"), 
+	    array("onDelete" => "CASCADE")
+	);
+	
 	// role
-
-	if ( ! $schema->hasTable('role') )
-	{
-
-		$roleTable = $schema->createTable("role");
-
-		$roleTable->addColumn("user_id", "integer", array("unsigned" => true));
-		$roleTable->addColumn("role", "string", array("length" => 64));
-
-		$roleTable->setPrimaryKey(array("user_id"));
-
-		$roleTable->addForeignKeyConstraint(
-			$usersTable, 
-		    array("user_id"), 
-		    array("id"), 
-		    array("onDelete" => "CASCADE")
-		);
-	}
-	else
+	if ( $schema->hasTable('role') )
 	{
 		$schema->dropTable('role');
+		$dropNeeded = true;
 	}
 
-	$queries = $schema->toSql($platform);
+	$roleTable = $schema->createTable("role");
+
+	$roleTable->addColumn("user_id", "integer", array("unsigned" => true));
+	$roleTable->addColumn("role", "string", array("length" => 64));
+
+	$roleTable->setPrimaryKey(array("user_id"));
+
+	$roleTable->addForeignKeyConstraint(
+		$usersTable, 
+	    array("user_id"), 
+	    array("id"), 
+	    array("onDelete" => "CASCADE")
+	);
+    
+    if ( $dropNeeded )
+    {
+	    $dropQueries = $schema->toDropSql($platform);
 	
-	foreach ( $queries as $query ) {
+	    // var_dump($dropQueries);die();
+	
+	    foreach ( $dropQueries as $query ) {
+		    $app['db']->executeQuery( $query );
+	    }
+	}
+
+	$createQueries = $schema->toSql($platform);
+	
+	foreach ( $createQueries as $query ) {
 		$app['db']->executeQuery( $query );
 	}
+	
+	// $queries = array_merge($dropQueries, $createQueries);
 
-	return $app->render( 'install.twig',  array( 'title' => $app['translator']->trans('Install'), 'queries' => $queries ) );
+	return $app->render( 'install.twig',  array( 'title' => $app['translator']->trans('Install'), 'queries' => $createQueries ) );
 } );
 
 return $installController;
