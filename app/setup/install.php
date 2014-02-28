@@ -18,7 +18,7 @@ $installController->get( '/', function( \Silex\Application $app ) {
 
 	$usersTable = $schema->createTable("user");
 
-	$usersTable->addColumn("id", "integer", array("unsigned" => true));
+	$usersTable->addColumn("id", "integer", array("unsigned" => true,"autoincrement" => true));
 	$usersTable->addColumn("firstname", "string", array("length" => 64));
 	$usersTable->addColumn("lastname", "string", array("length" => 64));
 	$usersTable->addColumn("email", "string", array("length" => 256));
