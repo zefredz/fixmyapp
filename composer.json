@@ -33,6 +33,8 @@
         "league/stack-robots": "1.0.*@dev",
         "atst/stack-backstage": "1.0.*@dev",
         "alsar/stack-ip-restrict": "dev-master",
+        
+        "zip-factory/zip-factory": "1.0.*",
 
 
         "components/underscore": "1.4.*",
